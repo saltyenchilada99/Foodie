@@ -8,8 +8,6 @@ app.get("/", (req, res) => {
   res.send("Hello from cloud!");
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
 app.get("/test", async (req, res) => {
     try {
         const result = await pool.query("SELECT NOW()");
@@ -18,3 +16,6 @@ app.get("/test", async (req, res) => {
         res.status(500).json({ success: false, error: err.message });
     }
 });
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
