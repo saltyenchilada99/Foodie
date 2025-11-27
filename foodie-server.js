@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
+const pool = require("./database");
 
 app.get("/", (req, res) => {
   res.send("Hello from cloud!");
