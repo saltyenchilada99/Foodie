@@ -3,6 +3,10 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const pool = require("./database");
 
+pool.query("SELECT NOW()")
+  .then(res => console.log("Database connected:", res.rows[0]))
+  .catch(err => console.error("Database connection error:", err));
+/*
 app.get("/", (req, res) => {
   res.send("Hello from cloud!");
 });
@@ -17,3 +21,4 @@ app.get("/test", async (req, res) => {
         res.status(500).json({ success: false, error: err.message });
     }
 });
+*/
