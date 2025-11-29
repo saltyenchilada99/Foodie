@@ -31,4 +31,16 @@ app.post("/api/newAccount", async (req, res) => {
   }
 });
 
+app.get("/api/viewEmail", async (req, res) => {
+
+    try {
+    await pool.query(
+      'SELECT email FROM public."user" WHERE userID = 1'
+    );
+    res.json({email: email});
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
