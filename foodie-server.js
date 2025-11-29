@@ -35,7 +35,7 @@ app.get("/api/viewEmail", async (req, res) => {
 
     try {
     await pool.query(
-      'SELECT email FROM public."user" WHERE userID = 1'
+      'SELECT email FROM public."user" WHERE userid = 1'
     );
     res.json({email: email});
   } catch (err) {
