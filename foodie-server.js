@@ -25,7 +25,7 @@ app.post("/api/newAccount", async (req, res) => {
       'INSERT INTO public."user" (firstname, lastname, email, password) VALUES ($1, $2, $3, $4)',
       [firstName, lastName, email, password]
     );
-    res.json({ firstName: firstName, lastName: lastName, email: email, password: password });
+    res.json({ firstname: firstName, lastname: lastName, email: email, password: password });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
