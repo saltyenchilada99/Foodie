@@ -18,7 +18,7 @@ app.get("/test", async (req, res) => {
 });
 
 app.post("/api/newAccount", async (req, res) => {
-    const {firstName, lastName, email, password}= req.body;
+    const {firstName, lastName, email, password} = req.body;
 
     try {
     await pool.query(
@@ -39,7 +39,7 @@ app.get("/api/viewEmail", async (req, res) => {
     await pool.query(
       'SELECT email FROM public."user" WHERE "userID" = 1'
     );
-    res.json({email: email});
+    res.json(result.rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
