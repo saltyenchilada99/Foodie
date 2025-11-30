@@ -22,7 +22,7 @@ app.post("/api/newAccount", async (req, res) => {
 
     try {
     await pool.query(
-      'INSERT INTO public."user" (firstname, lastname, email, password) VALUES ($1, $2, $3, $4)',
+      'INSERT INTO public."user" (firstName, lastName, email, password) VALUES ($1, $2, $3, $4)',
       [firstName, lastName, email, password]
     );
     res.json({ firstName: firstName, lastName: lastName, email: email, password: password });
