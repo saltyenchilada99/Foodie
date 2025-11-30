@@ -32,7 +32,7 @@ app.post("/api/newAccount", async (req, res) => {
 });
 
 
-app.get("/api/accountLookup", async (req, res) => {
+app.post("/api/accountLookup", async (req, res) => {
 
     const {email, password} = req.body;
 
