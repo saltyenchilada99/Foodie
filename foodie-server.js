@@ -33,13 +33,13 @@ app.post("/api/newAccount", async (req, res) => {
 
 app.get("/api/viewEmail", async (req, res) => {
 
-    const [email] = "";
+    var result = {email: ""};
 
     try {
-    const result = await pool.query(
+    result.email = await pool.query(
       'SELECT email FROM public."user" WHERE "userID" = 1'
     );
-    res.json(result.rows);
+    res.json(result.email);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
