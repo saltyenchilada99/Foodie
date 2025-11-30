@@ -38,9 +38,9 @@ app.post("/api/accountLookup", async (req, res) => {
 
     try {
     const result = await pool.query(
-      'SELECT * FROM public."user" WHERE "email" = $1 AND "password" = $2' [email, password]
+      'SELECT * FROM public."user" WHERE "email" = $1 AND "password" = $2', [email, password]
     );
-    if(result.rows == 1) return res.json({success: true});
+    if(result.rows === 1) return res.json({success: true});
     else return res.json({success: false})
   } catch (err) {
     res.status(500).json({ error: err.message });
