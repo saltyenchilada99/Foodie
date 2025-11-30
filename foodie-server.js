@@ -33,10 +33,10 @@ app.post("/api/newAccount", async (req, res) => {
 
 app.get("/api/viewEmail", async (req, res) => {
 
-    var result = {email: ""};
+    const [email] = "";
 
     try {
-    result.email = await pool.query(
+    const result = await pool.query(
       'SELECT email FROM public."user" WHERE "userID" = 1'
     );
     res.json(result.rows);
