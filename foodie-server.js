@@ -31,15 +31,17 @@ app.post("/api/newAccount", async (req, res) => {
   }
 });
 
-app.get("/api/viewEmail", async (req, res) => {
 
-    const [email] = "";
+app.get("/api/accountLookup", async (req, res) => {
+
+    const {email, password} = req.body;
 
     try {
     const result = await pool.query(
-      'SELECT email FROM public."user" WHERE "userID" = 1'
+      'SELECT * FROM public."user" WHERE "email" = $1 AND "password" = $2' [email, password]
     );
-    res.json(result.rows[0]);
+    if(result.rows == 1) res.json({success: true});
+    else res.json({success: false})
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
