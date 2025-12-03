@@ -27,7 +27,7 @@ app.post("/api/newAccount", async (req, res) => {
     );
     res.json({ success: true });
   } catch (err) {
-    res.status(500).json({ firstName: firstName});
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -38,9 +38,9 @@ app.post("/api/accountLookup", async (req, res) => {
 
     try {
     const result = await pool.query(
-      'SELECT * FROM public."user" WHERE "email" = $1 AND "password" = $2', [email, password]
+      'SELECT "firstName", "lastName", "followerCount", "followingCount" FROM public."user" WHERE "email" = $1 AND "password" = $2', [email, password]
     );
-    if(result.rows === 1) return res.json({success: true});
+    if(result.rowCount === 1) return res.json(result.rows);
     else return res.json({success: false})
   } catch (err) {
     res.status(500).json({ error: err.message });
