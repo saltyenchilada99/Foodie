@@ -27,7 +27,7 @@ app.post("/api/newAccount", async (req, res) => {
     );
     res.json({ success: true });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ firstName: firstName});
   }
 });
 
