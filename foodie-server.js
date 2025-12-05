@@ -9,12 +9,14 @@ app.get("/", (req, res) => {
 });
 
 app.get("/test", async (req, res) => {
-    try {
-        const result = await pool.query("SELECT NOW()");
-        res.json({ success: true, server_time: result.rows[0] });
-    } catch (err) {
-        res.status(500).json({ success: false, error: err.message });
-    }
+  try {
+    console.log("Attempting DB connection...");
+    const result = await pool.query("SELECT NOW()");
+    res.json({ success: true, server_time: result.rows[0] });
+  } catch (err) {
+    console.error("DB ERROR:", err);
+    res.status(500).json({ success: false, error: err.message });
+  }
 });
 
 app.post("/api/newAccount", async (req, res) => {
