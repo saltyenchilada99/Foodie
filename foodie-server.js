@@ -11,6 +11,7 @@ app.get("/", (req, res) => {
 app.get("/test", async (req, res) => {
   try {
     console.log("Attempting DB connection...");
+    console.log("Incoming /test request from:", req.ip);
     const result = await pool.query("SELECT NOW()");
     res.json({ success: true, server_time: result.rows[0] });
   } catch (err) {
@@ -37,6 +38,21 @@ app.post("/api/newAccount", async (req, res) => {
 app.post("/api/accountLookup", async (req, res) => {
 
     const {email, password} = req.body;
+
+    try {
+    const result = await pool.query(
+      'SELECT "firstName", "lastName", "followerCount", "followingCount" FROM public."user" WHERE "email" = $1 AND "password" = $2', [email, password]
+    );
+    if(result.rowCount === 1) return res.json(result.rows[0]);
+    else return res.json({success: false})
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post("/api/newPost", async (req, res) => {
+
+    const {postTitle, postAuthor, ingredientList, } = req.body;
 
     try {
     const result = await pool.query(
